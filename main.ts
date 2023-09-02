@@ -1,4 +1,4 @@
-import {Plugin, ItemView, WorkspaceLeaf, Notice} from 'obsidian';
+import {Plugin, ItemView, WorkspaceLeaf} from 'obsidian';
 import periodicJson from "./PeriodicTableJSON.json";
 import fitty from 'fitty';
 
@@ -9,26 +9,26 @@ export default class MyPlugin extends Plugin{
 		
 		this.registerView(
 			PERIODIC_VIEW,
-			(leaf) => new ExampleView(leaf)
+			(leaf) => new PeriodicView(leaf)
 		);
 		this.activateView();
 	}
 
-	onunload(){}
+	onunload(){
+		this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
+	}
 
 	async activateView(){
 		this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
 
 		await this.app.workspace.getRightLeaf(false).setViewState({
 			type: PERIODIC_VIEW,
-			active: true
+			active: false
 		});
-
-		this.app.workspace.revealLeaf(this.app.workspace.getLeavesOfType(PERIODIC_VIEW)[0]);
 	}
 }
 
-export class ExampleView extends ItemView{
+export class PeriodicView extends ItemView{
 	constructor(leaf: WorkspaceLeaf) {
 		super(leaf);
 	}
@@ -38,7 +38,7 @@ export class ExampleView extends ItemView{
 	}
 
 	getDisplayText() {
-		return "Example view";
+		return "Periodic Table";
 	}
 
 	async onOpen() {
@@ -54,7 +54,7 @@ export class ExampleView extends ItemView{
 								let num: number = this.setElementData((i*18) + j);
 								const tempDiv = div.createDiv(
 									{cls: "element", attr: 
-										{id: ExampleView.setElementDataToString(num)}},
+										{id: PeriodicView.setElementDataToString(num)}},
 	
 									(div) => {
 										div.createEl("p", {text: num.toString(), cls:"numOfEl"});
@@ -63,9 +63,9 @@ export class ExampleView extends ItemView{
 										}
 									}
 								);
-								tempDiv.addEventListener('click', function(event){
+								tempDiv.addEventListener('click', function(){
 									let element = periodicJson.elements[num - 1];
-									dataDiv.children[0].id = ExampleView.setElementDataToString(num);
+									dataDiv.children[0].id = PeriodicView.setElementDataToString(num);
 									dataDiv.children[0].children[0].children[0].textContent = element.number.toString();
 									dataDiv.children[0].children[0].children[1].textContent = element.atomic_mass.toString();
 									dataDiv.children[0].children[1].textContent = element.symbol;
@@ -75,7 +75,7 @@ export class ExampleView extends ItemView{
 									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electron_configuration;
 									dataDiv.children[3].textContent = "Group: " + element.group.toString();
 									dataDiv.children[4].textContent = "Period: " + element.period.toString();
-									dataDiv.children[5].textContent = "Number Of Valence Electrons: " + ExampleView.findValenceElectrons(num).toString();
+									dataDiv.children[5].textContent = "Number Of Valence Electrons: " + PeriodicView.findValenceElectrons(num).toString();
 
 								});
 							}
