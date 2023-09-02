@@ -75,6 +75,7 @@ export class ExampleView extends ItemView{
 									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electron_configuration;
 									dataDiv.children[3].textContent = "Group: " + element.group.toString();
 									dataDiv.children[4].textContent = "Period: " + element.period.toString();
+									dataDiv.children[5].textContent = "Number Of Valence Electrons: " + ExampleView.findValenceElectrons(num).toString();
 
 								});
 							}
@@ -101,6 +102,7 @@ export class ExampleView extends ItemView{
 				div.createEl("div", {cls: "electron-config"});
 				div.createEl("h4", {cls: "group"});
 				div.createEl("h4", {cls: "period"});
+				div.createEl("h4", {cls: "valence"});
 
 				//group
 				//row
@@ -151,6 +153,25 @@ export class ExampleView extends ItemView{
 		else if(str == "transition metal") str = "transition-metal";
 		else if(str.startsWith("unknown")) str = "unknown";
 		return str;
+	}
+
+	static findValenceElectrons(num: number): number{
+		num -= 1;
+		let group = periodicJson.elements[num].group;
+		if(group < 3) return group;
+		if(group > 12) return group % 10;
+
+		// transition metals
+
+		let electronConfigString = periodicJson.elements[num].electron_configuration;
+		let electronConfigArr = electronConfigString.split(" ");
+		let maxOrbit = 0;
+		for(let i = 0; i < electronConfigArr.length; i++){
+			if(parseInt(electronConfigArr[i].charAt(0)) > maxOrbit){
+				maxOrbit = i;
+			}
+		}
+		return parseInt(electronConfigArr[maxOrbit].charAt(2));
 	}
 
 
