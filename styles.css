@@ -1,0 +1,101 @@
+.mainDiv{
+	margin-top: 10px;
+	margin-right: 2px;
+	margin-left: 3px;
+	aspect-ratio: 16 / 9;
+	display: inline;
+}
+.subDiv{
+	display: flex;
+	flex-grow: 1;
+	width: 100%;
+}
+
+.element{
+	background: #ffffff;
+	margin: 1px;
+	flex: 1;
+	height: 11%;
+	color: #f0f;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+p {
+	font-size: 11px;
+	margin: 0;
+}
+.numOfEl{
+	font-size: 8px;
+}
+
+#nonExistant.element{
+	background-color: var(--background-secondary);
+	color: var(--background-secondary);
+}
+
+.elementButton{
+	all: unset;
+}
+.dataDiv{
+	color: #fff;
+}
+h2{
+	color: #fff;
+}
+
+.bigElement{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 10px;
+	width: 100px;
+}
+.numberAndMass{
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	padding-left: 3px;
+	padding-right: 3px;
+}
+h4{
+	padding: none;
+	margin: none;
+}
+
+
+
+
+/* All of the periodic elemnts backgrounds*/
+#nonmetal{
+	background-color: #abcdef;
+}
+#noble-gas{
+	background-color: #fedcba;
+}
+#alkali-metal{
+	background-color: #000000;
+}
+#alkaline-earth-metal{
+	background-color: #cccccc;
+}
+#post-transition-metal{
+	background-color: #77ff77;
+}
+#transition-metal{
+	background-color: #7777ff;
+}
+#metalloid{
+	background-color: #ff7777;
+}
+#lanthanide{
+	background-color: #789abc;
+}
+#actinide{
+	background-color: #89abcd;
+}
+#unknown{
+	background-color: #333;
+}

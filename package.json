@@ -1,0 +1,27 @@
+{
+  "name": "periodictable",
+  "version": "1.0.0",
+  "description": "This is a plugin to display the periodic table",
+  "main": "main.js",
+  "scripts": {
+    "dev": "node esbuild.config.mjs",
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "version": "node version-bump.mjs && git add manifest.json versions.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "obsidian": "latest",
+    "tslib": "2.4.0",
+    "typescript": "^5.2.2",
+	"builtin-modules": "3.3.0"
+
+  },
+  "dependencies": {
+    "esbuild": "0.19.2"
+  }
+}
