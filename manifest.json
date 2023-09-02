@@ -1,9 +1,9 @@
 {
-  "author": "Jake Cramer",
+  "author": "jake-cramer",
   "minAppVersion": "1.3.7",
   "name": "Periodic Table",
   "version": "1.0.0",
-  "description": "A periodic table in obsidian",
-  "id": "periodicTable",
+  "description": "View a periodic table in the sidebar",
+  "id": "periodic-table",
   "isDesktopOnly": true
 }
