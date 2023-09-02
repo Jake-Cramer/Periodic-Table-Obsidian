@@ -16,7 +16,7 @@
 	margin: 1px;
 	flex: 1;
 	height: 11%;
-	color: #f0f;
+	color: #fff;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -41,6 +41,7 @@ p {
 }
 .dataDiv{
 	color: #fff;
+	margin: 10px;
 }
 h2{
 	color: #fff;
@@ -50,13 +51,13 @@ h2{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 10px;
 	width: 100px;
 }
 .numberAndMass{
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	margin-top: 3px;
 	padding-left: 3px;
 	padding-right: 3px;
 }
@@ -64,25 +65,27 @@ h4{
 	padding: none;
 	margin: none;
 }
-
+.electron-config{
+	white-space: pre-wrap;
+}
 
 
 
 /* All of the periodic elemnts backgrounds*/
 #nonmetal{
-	background-color: #abcdef;
+	background-color: #6789ab;
 }
 #noble-gas{
-	background-color: #fedcba;
+	background-color: #ba9876;
 }
 #alkali-metal{
-	background-color: #000000;
+	background-color: #777;
 }
 #alkaline-earth-metal{
-	background-color: #cccccc;
+	background-color: #aaa;
 }
 #post-transition-metal{
-	background-color: #77ff77;
+	background-color: #33cc33;
 }
 #transition-metal{
 	background-color: #7777ff;
@@ -91,10 +94,10 @@ h4{
 	background-color: #ff7777;
 }
 #lanthanide{
-	background-color: #789abc;
+	background-color: #786687;
 }
 #actinide{
-	background-color: #89abcd;
+	background-color: #765567;
 }
 #unknown{
 	background-color: #333;

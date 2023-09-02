@@ -1,5 +1,6 @@
 import {Plugin, ItemView, WorkspaceLeaf, Notice} from 'obsidian';
 import periodicJson from "./PeriodicTableJSON.json";
+import fitty from 'fitty';
 
 export const PERIODIC_VIEW = "periodic-view";
 
@@ -69,10 +70,12 @@ export class ExampleView extends ItemView{
 									dataDiv.children[0].children[0].children[1].textContent = element.atomic_mass.toString();
 									dataDiv.children[0].children[1].textContent = element.symbol;
 									dataDiv.children[0].children[2].textContent = element.name;
-									dataDiv.children[1].textContent = element.category;
-									dataDiv.children[2].textContent = element.electron_configuration;
-									dataDiv.children[3].textContent = element.group.toString();
-									dataDiv.children[4].textContent = element.period.toString();
+									fitty('#name');
+									dataDiv.children[1].textContent = "Category: " + element.category;
+									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electron_configuration;
+									dataDiv.children[3].textContent = "Group: " + element.group.toString();
+									dataDiv.children[4].textContent = "Period: " + element.period.toString();
+
 								});
 							}
 						}
@@ -90,14 +93,14 @@ export class ExampleView extends ItemView{
 							div.createEl("p", {cls: "number"});
 							div.createEl("p", {cls: "mass"});
 						});
-						div.createEl("h2", {cls: "symbol"});
-						div.createEl("h5", {cls: "name"});
+						div.createEl("h1", {cls: "symbol"});
+						div.createEl("div", {cls: "name"});
 					}
 				);
 				div.createEl("h3", {cls: "category"});
-				div.createEl("h3", {cls: "electron-config"});
-				div.createEl("h3", {cls: "group"});
-				div.createEl("h3", {cls: "period"});
+				div.createEl("div", {cls: "electron-config"});
+				div.createEl("h4", {cls: "group"});
+				div.createEl("h4", {cls: "period"});
 
 				//group
 				//row
