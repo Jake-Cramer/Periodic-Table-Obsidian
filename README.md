@@ -5,4 +5,6 @@ Allows you to view the periodic table in the sidebar. Clicking on an element wil
 
 ### Credit
 
-All information was taken from https://github.com/Bowserinator/Periodic-Table-JSON
+All information was taken from:
+https://github.com/Bowserinator/Periodic-Table-JSON
+https://pubchem.ncbi.nlm.nih.gov/periodic-table/

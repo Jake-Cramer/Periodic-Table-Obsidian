@@ -1,5 +1,5 @@
 import {Plugin, ItemView, WorkspaceLeaf} from 'obsidian';
-import periodicJson from "./PeriodicTableJSON.json";
+import periodicJson from "./periodicTable.json";
 import fitty from 'fitty';
 
 export const PERIODIC_VIEW = "periodic-view";
@@ -59,24 +59,26 @@ export class PeriodicView extends ItemView{
 									(div) => {
 										div.createEl("p", {text: num.toString(), cls:"numOfEl"});
 										if(num > -1){
-											div.createEl("p", {text: periodicJson.elements[num - 1].symbol});
+											div.createEl("p", {text: periodicJson[num - 1].symbol});
 										}
 									}
 								);
 								tempDiv.addEventListener('click', function(){
-									let element = periodicJson.elements[num - 1];
+									let element = periodicJson[num - 1];
 									dataDiv.children[0].id = PeriodicView.setElementDataToString(num);
 									dataDiv.children[0].children[0].children[0].textContent = element.number.toString();
-									dataDiv.children[0].children[0].children[1].textContent = element.atomic_mass.toString();
+									dataDiv.children[0].children[0].children[1].textContent = element.atomicMass.toString();
 									dataDiv.children[0].children[1].textContent = element.symbol;
 									dataDiv.children[0].children[2].textContent = element.name;
 									fitty('#name');
 									dataDiv.children[1].textContent = "Category: " + element.category;
-									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electron_configuration;
+									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electronConfig;
 									dataDiv.children[3].textContent = "Group: " + element.group.toString();
 									dataDiv.children[4].textContent = "Period: " + element.period.toString();
 									dataDiv.children[5].textContent = "Number Of Valence Electrons: " + PeriodicView.findValenceElectrons(num).toString();
-
+									dataDiv.children[6].textContent = "Oxidation States: " + element.oxidationStates;
+									dataDiv.children[7].textContent = "Atomic Radius: " + element.atomicRadius;
+									dataDiv.children[8].textContent = "Phase: " + element.phase;
 								});
 							}
 						}
@@ -98,25 +100,17 @@ export class PeriodicView extends ItemView{
 						div.createEl("div", {cls: "name"});
 					}
 				);
-				div.createEl("h3", {cls: "category"});
-				div.createEl("div", {cls: "electron-config"});
-				div.createEl("h4", {cls: "group"});
-				div.createEl("h4", {cls: "period"});
-				div.createEl("h4", {cls: "valence"});
-
-				//group
-				//row
-				//normal state
+				div.createEl("div", {cls: "category attrib"});
+				div.createEl("div", {cls: "electron-config attrib"});
+				div.createEl("div", {cls: "group attrib"});
+				div.createEl("div", {cls: "period attrib"});
+				div.createEl("div", {cls: "valence attrib"});
+				div.createEl("div", {cls: "oxidationStates attrib"});
+				div.createEl("div", {cls: "atomicRadius attrib"});
+				div.createEl("div", {cls: "phase attrib"});
 			}
 		);
 		this.containerEl.appendChild(dataDiv);
-
-
-		/*
-		const container = this.containerEl.children[1];
-		container.empty();
-		container.createEl("h4", { text: "Example view" });
-		*/
 	}
 
 	private setElementData(num: number): number{
@@ -142,7 +136,7 @@ export class PeriodicView extends ItemView{
 		if(num == -1) return "nonExistant";
 		// will return the group name
 		num = num - 1;
-		let str = periodicJson.elements[num].category;
+		let str = periodicJson[num].category;
 		
 		if(str == "polyatomic nonmetal") str = "nonmetal";
 		else if(str == "diatomic nonmetal") str = "nonmetal";
@@ -157,13 +151,13 @@ export class PeriodicView extends ItemView{
 
 	static findValenceElectrons(num: number): number{
 		num -= 1;
-		let group = periodicJson.elements[num].group;
+		let group = periodicJson[num].group;
 		if(group < 3) return group;
 		if(group > 12) return group % 10;
 
 		// transition metals
 
-		let electronConfigString = periodicJson.elements[num].electron_configuration;
+		let electronConfigString = periodicJson[num].electronConfig
 		let electronConfigArr = electronConfigString.split(" ");
 		let maxOrbit = 0;
 		for(let i = 0; i < electronConfigArr.length; i++){
