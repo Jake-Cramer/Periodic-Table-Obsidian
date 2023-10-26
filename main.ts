@@ -6,21 +6,24 @@ export const PERIODIC_VIEW = "periodic-view";
 
 export default class MyPlugin extends Plugin{
 	onload(){
-		
-		this.registerView(
-			PERIODIC_VIEW,
-			(leaf) => new PeriodicView(leaf)
-		);
-		this.activateView();
+		const infoView = this.app.workspace.getLeavesOfType(PERIODIC_VIEW)[0];
+		if(!infoView){
+			this.registerView(
+				PERIODIC_VIEW,
+				(leaf) => new PeriodicView(leaf)
+			);
+		}
+        else{
+            this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
+            this.registerView(PERIODIC_VIEW, (leaf) => new PeriodicView(leaf));
+        }
+        this.activateView();
 	}
 
 	onunload(){
-		this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
 	}
 
 	async activateView(){
-		this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
-
 		await this.app.workspace.getRightLeaf(false).setViewState({
 			type: PERIODIC_VIEW,
 			active: false
@@ -51,7 +54,7 @@ export class PeriodicView extends ItemView{
 						{cls: "subDiv"},
 						(div) =>{
 							for(let j = 0; j < 18; j++){
-								let num: number = this.setElementData((i*18) + j);
+								const num: number = this.setElementData((i*18) + j);
 								const tempDiv = div.createDiv(
 									{cls: "element", attr: 
 										{id: PeriodicView.setElementDataToString(num)}},
@@ -64,7 +67,7 @@ export class PeriodicView extends ItemView{
 									}
 								);
 								tempDiv.addEventListener('click', function(){
-									let element = periodicJson[num - 1];
+									const element = periodicJson[num - 1];
 									dataDiv.children[0].id = PeriodicView.setElementDataToString(num);
 									dataDiv.children[0].children[0].children[0].textContent = element.number.toString();
 									dataDiv.children[0].children[0].children[1].textContent = element.atomicMass.toString();
@@ -75,9 +78,9 @@ export class PeriodicView extends ItemView{
 									dataDiv.children[2].textContent = "Electron configuration: \n" + element.electronConfig;
 									dataDiv.children[3].textContent = "Group: " + element.group.toString();
 									dataDiv.children[4].textContent = "Period: " + element.period.toString();
-									dataDiv.children[5].textContent = "Number Of Valence Electrons: " + PeriodicView.findValenceElectrons(num).toString();
-									dataDiv.children[6].textContent = "Oxidation States: " + element.oxidationStates;
-									dataDiv.children[7].textContent = "Atomic Radius: " + element.atomicRadius;
+									dataDiv.children[5].textContent = "Number of valence electrons: " + PeriodicView.findValenceElectrons(num).toString();
+									dataDiv.children[6].textContent = "Oxidation states: " + element.oxidationStates;
+									dataDiv.children[7].textContent = "Atomic radius: " + element.atomicRadius;
 									dataDiv.children[8].textContent = "Phase: " + element.phase;
 								});
 							}
@@ -151,14 +154,13 @@ export class PeriodicView extends ItemView{
 
 	static findValenceElectrons(num: number): number{
 		num -= 1;
-		let group = periodicJson[num].group;
+		const group = periodicJson[num].group;
 		if(group < 3) return group;
 		if(group > 12) return group % 10;
 
 		// transition metals
-
-		let electronConfigString = periodicJson[num].electronConfig
-		let electronConfigArr = electronConfigString.split(" ");
+		const electronConfigString = periodicJson[num].electronConfig
+		const electronConfigArr = electronConfigString.split(" ");
 		let maxOrbit = 0;
 		for(let i = 0; i < electronConfigArr.length; i++){
 			if(parseInt(electronConfigArr[i].charAt(0)) > maxOrbit){
@@ -167,7 +169,6 @@ export class PeriodicView extends ItemView{
 		}
 		return parseInt(electronConfigArr[maxOrbit].charAt(2));
 	}
-
 
 	async onClose() {
 		this.unload();
