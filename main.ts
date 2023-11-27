@@ -13,10 +13,6 @@ export default class MyPlugin extends Plugin{
 				(leaf) => new PeriodicView(leaf)
 			);
 		}
-        else{
-            this.app.workspace.detachLeavesOfType(PERIODIC_VIEW);
-            this.registerView(PERIODIC_VIEW, (leaf) => new PeriodicView(leaf));
-        }
         this.activateView();
 	}
 
