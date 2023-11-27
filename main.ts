@@ -37,7 +37,7 @@ export class PeriodicView extends ItemView{
 	}
 
 	getDisplayText() {
-		return "Periodic Table";
+		return "Periodic table";
 	}
 
 	async onOpen() {
