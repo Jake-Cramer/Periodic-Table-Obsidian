@@ -4,6 +4,6 @@
   "name": "Periodic Table",
   "version": "1.0.0",
   "description": "View a periodic table in the sidebar",
-  "id": "Periodic-Table-Obsidian",
+  "id": "periodic-table",
   "isDesktopOnly": true
 }
