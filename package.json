@@ -1,5 +1,5 @@
 {
-  "name": "periodictable",
+  "name": "periodic-table",
   "version": "1.0.0",
   "description": "This is a plugin to display the periodic table",
   "main": "main.js",
