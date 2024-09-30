@@ -66,7 +66,7 @@ export class PeriodicView extends ItemView{
 									const element = periodicJson[num - 1];
 									dataDiv.children[0].id = PeriodicView.setElementDataToString(num);
 									dataDiv.children[0].children[0].children[0].textContent = element.number.toString();
-									dataDiv.children[0].children[0].children[1].textContent = element.atomicMass.toString();
+									dataDiv.children[0].children[0].children[1].textContent = element.atomicMass.toString().substring(0, 10);
 									dataDiv.children[0].children[1].textContent = element.symbol;
 									dataDiv.children[0].children[2].textContent = element.name;
 									fitty('#name');

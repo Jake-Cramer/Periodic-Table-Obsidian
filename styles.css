@@ -23,12 +23,21 @@
 	align-items: center;
 }
 
-p.elSymb {
+.elSymb{
 	font-size: 11px;
 	margin: 0;
 }
 .numOfEl{
 	font-size: 8px;
+    margin: 0;
+}
+.number{
+	font-size: 11px;
+    margin: 0;
+}
+.mass{
+	font-size: 11px;
+    margin: 0;
 }
 
 #nonExistant.element{
