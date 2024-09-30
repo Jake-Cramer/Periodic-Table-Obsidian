@@ -58,7 +58,7 @@ export class PeriodicView extends ItemView{
 									(div) => {
 										div.createEl("p", {text: num.toString(), cls:"numOfEl"});
 										if(num > -1){
-											div.createEl("p", {text: periodicJson[num - 1].symbol});
+											div.createEl("p", {text: periodicJson[num - 1].symbol, cls:"elSymb"});
 										}
 									}
 								);
